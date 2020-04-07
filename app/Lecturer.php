@@ -8,6 +8,6 @@ class Lecturer extends Model
 {
     public function enrolments()
     {
-        return $this->hasMany('App\Enrolment');
+        return $this->hasMany('App\enrolment');
     }
 }

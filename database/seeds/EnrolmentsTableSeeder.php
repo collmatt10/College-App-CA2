@@ -4,9 +4,9 @@ use Faker\Factory;
 use Illuminate\Database\Seeder;
 use App\Course;
 use App\Lecturer;
-use App\Enrolment;
+use App\enrolment;
 
-class EnrolmentsTableSeeder extends Seeder
+class enrolmentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -25,7 +25,7 @@ class EnrolmentsTableSeeder extends Seeder
 
           $dateTime = $faker->dateTimeBetween('-3 months', 'now');
 
-          $e = new Enrolment();
+          $e = new enrolment();
           $e->course_id = $c->id;
           $e->lecturer_id = $l->id;
           $e->date = $dateTime->format('Y-m-d');

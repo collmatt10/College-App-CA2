@@ -5,13 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
-use App\Enrolment;
+use App\enrolment;
 
-class EnrolmentController extends Controller
+class enrolmentController extends Controller
 {
     public function index()
     {
-        $enrolments = Enrolment::all()->load(['course', 'lecturer']);
+        $enrolments = enrolment::all()->load(['course', 'lecturer']);
 
         return response()->json(
           [
@@ -48,7 +48,7 @@ class EnrolmentController extends Controller
             422);
         }
 
-        $enrolment = new Enrolment();
+        $enrolment = new enrolment();
         $enrolment->date = $request->input('date');
         $enrolment->time = $request->input('time');
         $enrolment->status = $request->input('status');
@@ -67,10 +67,10 @@ class EnrolmentController extends Controller
 
     public function show($id)
     {
-        $enrolment = Enrolment::find($id);
+        $enrolment = enrolment::find($id);
 
         if ($enrolment === null) {
-          $statusMsg = 'Enrolment not found!';
+          $statusMsg = 'enrolment not found!';
           $statusCode = 404;
         }
         else {
@@ -89,12 +89,12 @@ class EnrolmentController extends Controller
 
     public function update(Request $request, $id)
     {
-        $enrolment = Enrolment::find($id);
+        $enrolment = enrolment::find($id);
 
         if ($enrolment === null) {
           return response()->json(
             [
-                'status' => 'Enrolment not found!',
+                'status' => 'enrolment not found!',
                 'data' => null
             ],
             404);
@@ -144,15 +144,15 @@ class EnrolmentController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $enrolment = Enrolment::find($id);
+        $enrolment = enrolment::find($id);
 
         if ($enrolment === null) {
-          $statusMsg = 'Enrolment not found!';
+          $statusMsg = 'enrolment not found!';
           $statusCode = 404;
         }
         else {
           $enrolment->delete();
-          $statusMsg = "Enrolment: {$id} deleted";
+          $statusMsg = "enrolment: {$id} deleted";
           $statusCode = 200;
         }
 

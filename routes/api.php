@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +28,13 @@ Route::middleware('auth:api')->group(function () {
     Route::get('logout', 'API\PassportController@logout');
 
     Route::resource('courses', 'API\CourseController')->except([
-        'create', 'edit'
+        'create', 'edit', 'show'
     ]);
+
     Route::resource('lecturers', 'API\LecturerController')->except([
-        'create', 'edit'
+        'create', 'edit', 'show'
     ]);
     Route::resource('enrolments', 'API\EnrolmentController')->except([
-        'create', 'edit'
+        'create', 'edit', 'show'
     ]);
 });
