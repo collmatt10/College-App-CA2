@@ -93,14 +93,14 @@
 export default {
   data() {
     return {
-      enrolment:{
+      enrolment:{ //enrolement object
         date: '',
         time: '',
         status: '',
         courses: '',
-        lecturers: '',
+        lecturers: '', //empty data in this object that must be loaded from an array
      },
-      loggedIn: true,
+      loggedIn: false,
       errors: [],
       courses: [],
       lecturers: []
@@ -109,21 +109,21 @@ export default {
 
   created() {
     if (localStorage.getItem('token')) {
-      this.loggedIn = true;
+      this.loggedIn = true;  //if there is a token, then the user is logged in
     }
     else {
       this.loggedIn = false;
       this.$router.push('/');
     }
-    this.getCourses();
+    this.getCourses(); //get all the courses and lecturers and display them
     this.getLecturers();
   },
   methods: {
-    onSubmit(evt) {
+    onSubmit(evt) { //submit button event
       evt.preventDefault()
       let app = this;
       let token = localStorage.getItem('token');
-      axios.post(`/api/enrolments`, {
+      axios.post(`/api/enrolments`, { //post this data to this route
         date: app.enrolment.date,
         time: app.enrolment.time,
         status: app.enrolment.status,

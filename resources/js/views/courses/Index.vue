@@ -32,7 +32,7 @@
 export default {
   data() {
     return {
-      items: []
+      items: [] 
     }
   },
   created(){
@@ -44,7 +44,7 @@ export default {
     .then(function (response) {
        console.log(response.data);
        app.items = response.data.data;
-         app.getCourses();
+         app.getCourses(); //load all courses
     })
     .catch(function (error) {
        console.log(error);
@@ -53,12 +53,12 @@ export default {
   methods: {
     getCourses() {
       let app = this;
-      let token = localStorage.getItem('token');
-      axios.get('/api/courses', {
+      let token = localStorage.getItem('token'); //get the user token
+      axios.get('/api/courses', { //get the json data from this route
         headers: { Authorization: "Bearer " + token}
       })
       .then(function (response) {
-         console.log(response.data);
+         console.log(response.data); //display the data in the response
          app.courses = response.data.data;
       })
       .catch(function (error) {
@@ -68,12 +68,12 @@ export default {
     deleteCourse(id) {
       let app = this;
       let token = localStorage.getItem('token');
-      axios.delete(`/api/courses/${id}`, {
+      axios.delete(`/api/courses/${id}`, { //delete the course with this id in the route
         headers: { Authorization: "Bearer " + token}
       })
       .then(function (response){
         console.log(response.data);
-        app.getCourses();
+        app.getCourses(); //get all courses
       });
     }
   }

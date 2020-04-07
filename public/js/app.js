@@ -2705,7 +2705,7 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (response) {
       console.log(response.data);
       app.items = response.data.data;
-      app.getCourses();
+      app.getCourses(); //load all courses
     })["catch"](function (error) {
       console.log(error);
     });
@@ -2713,13 +2713,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getCourses: function getCourses() {
       var app = this;
-      var token = localStorage.getItem('token');
+      var token = localStorage.getItem('token'); //get the user token
+
       axios.get('/api/courses', {
+        //get the json data from this route
         headers: {
           Authorization: "Bearer " + token
         }
       }).then(function (response) {
-        console.log(response.data);
+        console.log(response.data); //display the data in the response
+
         app.courses = response.data.data;
       })["catch"](function (error) {
         console.log(error);
@@ -2729,12 +2732,13 @@ __webpack_require__.r(__webpack_exports__);
       var app = this;
       var token = localStorage.getItem('token');
       axios["delete"]("/api/courses/".concat(id), {
+        //delete the course with this id in the route
         headers: {
           Authorization: "Bearer " + token
         }
       }).then(function (response) {
         console.log(response.data);
-        app.getCourses();
+        app.getCourses(); //get all courses
       });
     }
   }
@@ -2921,13 +2925,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       enrolment: {
+        //enrolement object
         date: '',
         time: '',
         status: '',
         courses: '',
-        lecturers: ''
+        lecturers: '' //empty data in this object that must be loaded from an array
+
       },
-      loggedIn: true,
+      loggedIn: false,
       errors: [],
       courses: [],
       lecturers: []
@@ -2935,21 +2941,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     if (localStorage.getItem('token')) {
-      this.loggedIn = true;
+      this.loggedIn = true; //if there is a token, then the user is logged in
     } else {
       this.loggedIn = false;
       this.$router.push('/');
     }
 
-    this.getCourses();
+    this.getCourses(); //get all the courses and lecturers and display them
+
     this.getLecturers();
   },
   methods: {
     onSubmit: function onSubmit(evt) {
+      //submit button event
       evt.preventDefault();
       var app = this;
       var token = localStorage.getItem('token');
       axios.post("/api/enrolments", {
+        //post this data to this route
         date: app.enrolment.date,
         time: app.enrolment.time,
         status: app.enrolment.status,
