@@ -96,7 +96,6 @@
       }
     },
     created() {
-      // console.log(localStorage.getItem('token'));
       if (localStorage.getItem('token')) {
         this.loggedIn = true;
       }
